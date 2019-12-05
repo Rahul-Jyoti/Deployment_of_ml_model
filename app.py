@@ -14,7 +14,7 @@ app = Flask(__name__)
 # def hello():
 #     return render_template('home.html')
 
-@app.route('/',methods=['POST'])
+@app.route('/',methods=['GET','POST'])
 def recommend():
     if request.method == 'POST':
         user_id_index = request.get_json(force=True)
@@ -77,7 +77,9 @@ def recommend():
         # for i in book_title_of_books_recommended:
         #     print(i)    
 
-        return jsonify(final_50_recommended_bookid_list)
+        output = {'results' : final_50_recommended_bookid_list} 
+
+        return jsonify(results=output)
 
 if __name__ == '__main__':
     app.run(port = 5000, debug=True)
